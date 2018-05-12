@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+{include file='public/headerCss'}
+<title>游戏管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统设置 <span class="c-gray en">&gt;</span> 游戏管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	
+	<table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">游戏管理</th>
+			</tr>
+			<tr class="text-c">
+				<th width="200">游戏名称</th>
+				<th width='200'>间隔投注时间（秒）</th>
+				<th width="300">游戏简介</th>
+				<th width="70">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-c">
+				<td>鱼虾蟹</td>
+				<td><input type="number" name="" value='20'></td>
+				<td>鱼虾蟹</td>
+				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_del('角色编辑','admin-role-add.html','4')" style="text-decoration:none">保存更改</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{include file='public/_footer'}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__HUI__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+/*管理员-角色-添加*/
+function admin_role_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-编辑*/
+function admin_role_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-删除*/
+function admin_role_del(obj,id){
+	layer.confirm('确定保存更改后的信息吗',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '',
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").remove();
+				layer.msg('保存成功!',{icon:1,time:1000});
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+</script>
+</body>
+</html>

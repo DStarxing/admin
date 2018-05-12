@@ -1,0 +1,108 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+{include file='public/headerCss'}
+<title>提现请求列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 业务流水 <span class="c-gray en">&gt;</span> 提现请求 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<thead>
+				<tr class="text-c">
+					<th width="25"><input type="checkbox" name="" value=""></th>
+					<th width="80">用户ID</th>
+					<th width="80">用户名</th>
+					<th width="80">提现金额</th>
+					<!-- <th width="80">上级关系</th> -->
+					<th width="80">银行名称</th>
+					<th width="75">开户姓名</th>
+					<th width="60">银行帐号</th>
+					<th width="120">开户行</th>
+					<th width="80">时间</th>
+					<th width="80">处理</th>
+				</tr>
+			</thead>
+			<tbody>
+				{volist name='$data' id='da'}
+				<tr class="text-c">	
+					<td><input type="checkbox" value="" name=""></td>
+					<td>{$da.uid}</td>
+					<td class="text-l">{$da.username}</td>
+					<td>{$da.amount}</td>
+					<!-- <td></td> -->
+					<td>{$da.bankName}</td>
+					<td>{$da.name}</td>
+					<td>{$da.account}</td>
+					<td>{$da.counName}</td>
+					<td class="td-status">{:date('Y-m-d H:i:s',$da.time)}</td>
+					<td class="f-14 td-manage">
+						<a style="text-decoration:none;color: #66D9EF"  onClick="userBankInfo('请求信息','{:url('/User/showBank/'.$da.id)}',450,400)" href="javascript:;" title="到帐">到帐处理</a>
+						<a style="text-decoration:none;color:#F92672;" class="ml-5" onClick="article_del(this,{$da.id})" href="javascript:;" title="到帐">通知到帐</a>
+					</td>
+				</tr>
+				{/volist}
+
+
+			</tbody>
+
+		</table>
+			<!-- 分页 -->
+			<div align="center">
+				{$data->render()}
+			</div>
+	</div>
+</div>
+{include file='public/_footer'}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__HUI__/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+
+
+/*资讯-删除*/
+function article_del(obj,id){
+	
+	// console.log($(obj));
+	// alert(id);
+	layer.confirm('是否已经到帐？',function(index){
+		$.ajax({
+			url: '/CoinArrive',
+			type: 'POST',
+			data:{'id':id},
+			dataType: 'json',
+			success: function(data){
+				if(data == 'yes'){
+					layer.msg('已到帐!',{icon:1,time:2000});	
+					$(obj).parents("tr").remove();
+					
+				}else{
+					layer.msg('网络故障!',{icon:1,time:2000});	
+				}
+			},
+			error:function(data) {
+				alert(data);
+				// layer.msg(data,{icon:1,time:1000});
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+
+
+function userBankInfo(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+</script> 
+</body>
+</html>

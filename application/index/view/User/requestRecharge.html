@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+{include file='public/headerCss'}
+<title>资讯列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 业务流水 <span class="c-gray en">&gt;</span> 充值请求 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c">
+		<form method="get" action="{:url('/requestR')}">
+		<button onclick="removeIframe()" class="btn btn-primary radius">关闭选项卡</button>
+	 <span class="select-box inline">
+		</span> 日期范围：
+		<input type="text" name="minTime" value="{$minTime ? $minTime : ''}" onfocus="WdatePicker( {literal}{ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' }{/literal})" id="logmin" class="input-text Wdate" style="width:120px;">
+		-
+		<input type="text" name="maxTime" value="{$maxTime ? $maxTime : ''}" onfocus="WdatePicker({literal}{ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' }{/literal})" id="logmax" class="input-text Wdate" style="width:120px;">
+		<!-- <input type="text" name="" id="" placeholder=" 资讯名称" style="width:250px" class="input-text"> -->
+		<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜记录</button>
+		<form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">  <span class="r">本页数据：<strong>{$num}</strong> 条</span> </div>
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<thead>
+				<tr class="text-c">
+					<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
+					<th width="80">用户ID</th>
+					<th width="80">用户名</th>
+					<!-- <th width="80">上级关系</th> -->
+					<th width="80">充值金额</th>
+					<!-- <th width="80">实际到帐</th> -->
+					<th width="80">充值前资金</th>
+					<th width="80">充值单号</th>
+					<th width="80">充值银行</th>
+					<th width="80">备注</th>
+					<th width="80">申请时间</th>
+					<th width="120">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+					{volist name='$data' id='da'}
+				<tr class="text-c">
+					<!-- <td><input type="checkbox" value="" name=""></td> -->
+					<td style="color: #66D9EF">{$da.id}</td>
+					<td style="color: #66D9EF">{$da.username}</td>
+					<!-- <td class="">资讯标题</td> -->
+					<td style="color: #F92672">{$da.amount}</td>
+					<!-- <td>行业动态</td> -->
+					<td style="color: #F92672">{$da.oldCoin}</td>	
+					<td style="color: #66D9EF">{$da.orderId}</td>
+					<td style="color: #66D9EF">{$da.bankName}</td>
+					<td>{$da.info ?: '~' }</td>
+					<td style="color: #66D9EF">{:date('Y-m-d H:i:s',$da.time)}</td>
+					<td class="f-14 td-manage" style="">
+						<a style="text-decoration:none;" onClick="article_stop(this,{$da.id})" href="javascript:;" title="到帐处理" class="btn btn-primary radius">确认到帐</a>
+					</td>
+				</tr>
+					{/volist}
+			</tbody>
+		</table>
+
+		<!-- 分页 -->
+			<div align="center">
+				{$data->render()}
+			</div>
+	</div>
+</div>
+{include file='public/_footer'}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__HUI__/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+/*确认到帐*/
+function article_stop(obj,id){
+	layer.confirm('是否确认到帐？确认后该账户将收到充值金额.',function(index){
+		$.ajax({
+			url:'/setUserCoin',
+			type: 'POST',
+			data:{'id':id},
+			dataType:'json',
+			success: function(data){
+				if(data == 'yes'){
+					layer.msg('已到帐!',{icon:6,time:3000});
+					$(obj).parents("tr").remove();
+				}else{
+					layer.msg('网络故障 充值失败',{icon:5,time:3000});
+				}
+			},
+			error:function(data){
+				layer.msg('故障 联系管理员QQ:1006945937',{icon:5,time:3000});
+				console.log(data.msg);
+			}
+		});		
+	});
+}
+
+
+
+</script> 
+</body>
+</html>

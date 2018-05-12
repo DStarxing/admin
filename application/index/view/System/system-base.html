@@ -1,0 +1,243 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+{include file='public/headerCss'}
+<title>基本设置</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+	<span class="c-gray en">&gt;</span>
+	系统管理
+	<span class="c-gray en">&gt;</span>
+	基本设置
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+	<form class="form form-horizontal" id="form-article-add" action="{:url('/System/updateData')}" method="post">
+		<div id="tab-system" class="HuiTab">
+			<div class="tabBar cl">
+				<span>基本设置</span>
+				<span>账户清理</span>
+				<!-- <span>邮件设置</span>
+				<span>其他设置</span> -->
+			</div>
+
+			<div class="tabCon">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						网站名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-title" name="webName" value="{$data['webName']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">网站开关：</label>
+						<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+						<div class="radio-box">
+							<input name="webState" type="radio" id="web-1" value="1" {$data['webState']==1 ? 'checked' : ''} >
+						<label for="web-1">开</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="web-2" name="webState" value="0" {$data['webState']==0 ? 'checked' : ''}>
+						<label for="web-2">关</label>
+						</div>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">代理投注开关：</label>
+						<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+						<div class="radio-box">
+							<input name="daili" type="radio" id="daili-1" value="1" {$data['daili']==1 ? 'checked' : ''} >
+						<label for="daili-1">开</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="daili-2" name="daili" value="0" {$data['daili']==0 ? 'checked' : ''}>
+						<label for="daili-2">关</label>
+						</div>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">抢庄开关：</label>
+						<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+						<div class="radio-box">
+							<input name="boss" type="radio" id="boss-1" value="1" {$data['boss']==1 ? 'checked' : ''} >
+						<label for="boss-1">开</label>
+						</div>
+						<div class="radio-box">
+							<input type="radio" id="boss-2" name="boss" value="0" {$data['boss']==0 ? 'checked' : ''}>
+						<label for="boss-2">关</label>
+						</div>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						最大下注：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-description" name="maxamount" value="{$data['maxamount']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						最小下注：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-static"  name="minamount" value="{$data['minamount']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						最大充值：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-uploadfile" name="maxrecharge"  value="{$data['maxrecharge']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						最小充值：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-description" name="minrecharge" value="{$data['minrecharge']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						最大提现：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-static" name="maxdeposit" value="{$data['maxdeposit']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						最小提现：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-uploadfile" name="mindeposit" value="{$data['mindeposit']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						客服地址：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-copyright" name="kefu" value="{$data['kefu']}" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						封单时间(秒)：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" id="website-copyright" name="fengdan" value="{$data['fengdan']}" class="input-text">
+					</div>
+				</div>
+				<!-- <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">账户清理：</label>
+					<div class="formControls col-xs-8 col-sm-2">
+						<input type="text" id="website-icp"  value="" class="input-text">
+					</div>
+				</div> -->
+				<!-- <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">统计代码：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<textarea class="textarea"></textarea>
+					</div>
+				</div> -->
+				<div class="row cl">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+						<!-- <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button> -->
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="tabCon">
+			<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						余额低于(元)：</label>
+					<div class="formControls col-xs-8 col-sm-2">
+						<input type="text" id="clearCoin"  value="10" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						未登录时间(天)：</label>
+					<div class="formControls col-xs-8 col-sm-2">
+						<input type="text" id="clearTime"  value="30" class="input-text">
+					</div>
+				</div>
+				<div class="row cl">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button onClick="article_clear();" class="btn btn-primary radius"  type="button"><i class="Hui-iconfont">&#xe632;</i> 清除数据</button>
+					</div>
+				</div>
+		</div>
+</div>
+
+{include file='public/_footer'}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__HUI__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__HUI__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__HUI__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__HUI__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	$("#tab-system").Huitab({
+		index:0
+	});
+});
+
+function article_save_submit(){	
+	$.ajax({
+			type: 'POST',
+			url: "{:url('/System/updateData')}",
+			dataType: 'json',
+			data:$('#form-article-add').serialize(),
+			success: function(data){	
+				if(data == 'error'){
+					layer.msg('更新失败!',{icon:2,time:2000});
+				}else{
+					layer.msg('更新成功!',{icon:1,time:2000});
+				}
+			},
+			error:function(data) {
+				layer.msg('失败',{icon:5,time:1000});
+			},
+		});		
+}
+
+function article_clear(){
+	var coin = $('#clearCoin').val();
+	var time = $('#clearTime').val();
+	// alert(isNaN(coin));
+	if(isNaN(coin) || isNaN(time) || coin == '' || time == ''){
+		layer.msg('请输入数字!',function(){
+
+		});
+	}else{
+		layer.confirm('确定删除数据吗',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '',
+			dataType: {coin:coin,time:time},
+			success: function(data){
+				
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+	}
+	
+}
+
+</script>
+</body>
+</html>

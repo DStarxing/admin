@@ -1,0 +1,54 @@
+{include file='public/headerCss'}
+
+<title>体现请求</title>
+
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add">
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"></span>银行名称：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">{$data.bankName}</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">持卡人姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$data.name}" placeholder="" id="articletitle2" name="articletitle2">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">银行卡号：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$data.account}" placeholder="" id="articletitle2" name="articletitle2">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">申请金额：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$data.amount}" placeholder="" id="articletitle2" name="articletitle2">
+			</div>
+		</div>
+	</form>
+</article>
+
+{include file='public/_footer'}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__HUI__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__HUI__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__HUI__/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/ueditor/1.4.3/ueditor.config.js"></script> 
+<script type="text/javascript" src="__HUI__/lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
+<script type="text/javascript" src="__HUI__/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+
+	
+	//表单验证
+	
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
